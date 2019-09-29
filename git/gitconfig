@@ -1,0 +1,52 @@
+[remote "origin"]
+	fetch = +refs/heads/*:refs/remotes/origin/*
+	fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
+[merge]
+    # Merge conflict resolving tool
+    tool = meld
+    
+    # Clean up backup files created by merge tools on tool exit
+    keepBackup = false
+    
+    # Clean up temp files created by merge tools on tool exit
+    keepTemporaries = true
+    
+    # Put the temp files in a dedicated dir anyway
+    writeToTemp = true
+[push]
+	default = simple
+[user]
+    email = aguha@flowtraders.com
+	name = Abhishek Guha
+[color]
+    ui = true
+[color "status"]
+    added = green
+    changed = yellow
+    untracked = red
+[core]
+    autocrlf = input
+    editor = vim
+[alias]
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+    undo = reset --soft HEAD^
+    f = "!git ls-files | grep -i"
+    lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+    lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+    le = log --oneline --decorate
+    lg = log --graph --pretty=format:'%C(yellow)%h%C(auto)%d%Creset %s %C(white)- %an, %ar%Creset'
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+    lb = log -p -M --follow --stat --
+    filelog = log -u
+    fl = log -u
+    dl = "!git ll -1"
+    dlc = diff --cached HEAD^
+    
+    # Useful when you have to update your last commit
+    # with staged files without editing the commit message.
+    oops = commit --amend --no-edit    
