@@ -3,7 +3,7 @@
 # For each rc/config file, move the current file (if exists) to backup and 
 # symlink the file with the one present in git repo
 
-resource_files=(zshrc zshenv vimrc gitconfig tmux.conf)
+resource_files=(zshrc zshenv vimrc gitconfig tmux.conf dircolors)
 
 home=$HOME
 
@@ -13,6 +13,7 @@ apps[zsh]=zsh
 apps[tmu]=tmux
 apps[vim]=vim
 apps[git]=git
+apps[dir]=dircolors
 
 BOLD='\033[1m'
 RED='\033[0;31m'
