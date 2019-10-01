@@ -18,10 +18,6 @@ map <Left> <NOP>
 map <Right> <NOP>
 
 
-" Show lightline status bar always
-set laststatus=2
-
-
 " Don't show -- INSERT -- while in INSERT MODE
 set noshowmode
 
@@ -129,7 +125,7 @@ call vundle#begin()
 Plugin 'tpope/vim-fugitive'                                                        
 Plugin 'tpope/vim-commentary'                                                        
 Plugin 'VundleVim/Vundle.vim'                                                      
-Plugin 'Valloric/YouCompleteMe'                                                  
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'nvie/vim-flake8'                                                           
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}                    
 " Plugin 'vim-airline/vim-airline'
@@ -224,6 +220,11 @@ autocmd VimLeave * NERDTreeClose
 autocmd InsertEnter * set cursorline
 autocmd InsertLeave * set nocursorline
 highlight CursorLine term=bold cterm=bold guibg=Gray40
+
+
+" Don't show -- INSERT -- while in INSERT MODE
+set noshowmode
+
 
 " Only start NerdTree on Vim startup
 " autocmd VimEnter * NERDTree
