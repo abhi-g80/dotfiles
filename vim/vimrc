@@ -224,7 +224,7 @@ highlight CursorLine term=bold cterm=bold guibg=Gray40
 
 " Don't show -- INSERT -- while in INSERT MODE
 set noshowmode
-
+set laststatus=2
 
 " Only start NerdTree on Vim startup
 " autocmd VimEnter * NERDTree

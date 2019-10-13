@@ -21,13 +21,26 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
+dir=$(dirname "$0")
+
+read -p "Directory is ${dir}, continue ? (y/n) " yn
+case $yn in
+	[Yy]* ) ;;
+	[Nn]* ) exit;;
+	* ) echo "Please answer yes or no.";;
+esac
+
 # Setup rcfiles
 for file in ${resource_files[@]}; do
     echo -e "Processing ${BOLD}${RED}$file ${NC}"
     rcfile=${home}/.${file}
 
     app=${apps[${file:0:3}]}
-    dir=$(dirname "$0")
+    echo "$file - ${file:0:3} - $app - ${apps[${file:0:3}]}"
+    read -p "Continue ? (y/n) " yn
+    if [[ $yn == "n" ]]; then
+        exit;
+    fi
     lnk=${dir}/${app}/${file}
 
     if [[ -f ${rcfile}  ]]; then
