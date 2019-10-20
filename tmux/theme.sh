@@ -25,12 +25,12 @@ set-option -g status-attr default
 # default window title colors
 set-window-option -g window-status-fg $tm_color_inactive
 set-window-option -g window-status-bg default
-set -g window-status-format "#[fg=$tm_color_music]#I'.' #W"
+set -g window-status-format "#[fg=$tm_color_music]#I. #W"
 
 # active window title colors
 set-window-option -g window-status-current-fg $tm_color_active
 set-window-option -g window-status-current-bg default
-set-window-option -g  window-status-current-format "#[bold]#I #[bold]#W"
+set-window-option -g  window-status-current-format "#[bold]#I. #[bold]#W"
 
 # pane border
 set-option -g pane-border-fg $tm_color_inactive
