@@ -133,7 +133,7 @@ Plugin 'nvie/vim-flake8'
 Plugin 'itchyny/lightline.vim'
 Plugin 'scrooloose/nerdtree'                                                       
 Plugin 'Xuyuanp/nerdtree-git-plugin'                                               
-Plugin 'lifepillar/vim-solarized8'
+" Plugin 'lifepillar/vim-solarized8'
 
 " VIM markdown support
 Plugin 'godlygeek/tabular'
@@ -200,7 +200,7 @@ let g:lightline = {
   \     ]
   \   },
 	\   'component': {
-	\     'lineinfo': ' %3l:%-2v',
+	\     'lineinfo': '%3l:%-2v',
 	\   },
   \   'component_function': {
   \     'gitbranch': 'fugitive#head',

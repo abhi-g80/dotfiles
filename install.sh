@@ -63,8 +63,8 @@ done
 
 # Setup vim
 if [[ ! -d ${home}/.vim/backup ]]; then
-    mkdir ${home}/.vim/backup
+    mkdir -p ${home}/.vim/backup
 fi
 if [[ ! -d ${home}/.vim/swap ]]; then
-    mkdir ${home}/.vim/swap
+    mkdir -p ${home}/.vim/swap
 fi
