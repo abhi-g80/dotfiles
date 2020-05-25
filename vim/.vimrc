@@ -1,14 +1,6 @@
-" Coloring
-let term=$TERM
-if term == "xterm"
-    colorscheme evening            " syntax highlight theme
-"elseif term == "xterm-256color"
-"    colorscheme darkblue
-else
-    colorscheme solarized
-endif
-syntax on                          " show syntax color
-set background=dark                " set background color
+" Coloring (use gruvbox)
+syntax on
+set background=dark
 
 
 " Practice HJKL
@@ -18,19 +10,79 @@ map <Left> <NOP>
 map <Right> <NOP>
 
 
-" Don't show -- INSERT -- while in INSERT MODE
-set noshowmode
+" Set a map leader for more key combos
+let mapleader = ','
 
+" Some leader combos
+" quick save
+nmap <leader>, :w<cr>
 
-" Key bindings
-" Save using esc+esc
-" nnoremap <Esc><Esc> :w<CR>
+" quick paste toggle
+set pastetoggle=<leader>v
+
+" quick edit vimrc
+nnoremap <leader>ev :e! ~/.vimrc<cr>
+
+" quick edit gitconfig
+nnoremap <leader>eg :e! ~/.gitconfig<cr>
+
+" quick edit zshrc
+nnoremap <leader>ez :e! ~/.zshrc<cr>
+
+" quick edit tmux config
+nnoremap <leader>et :e! ~/.tmux.conf<cr>
+
+" quick edit tmux config
+nnoremap <leader>nt :NERDTreeToggle<cr>
+
+" quick switch between buffers
+nmap <leader>. <c-^>
+
+" quick source .vimrc
+nmap <leader>so :so ~/.vimrc<cr>
 
 
 " Open new splits easily
 map vv <C-W>v
 map ss <C-W>s
+" This will quit current buffer
 map Q  <C-W>q
+
+
+" Set correct path, for recursive vim-find
+set path+=**
+
+
+" Set encoding to utf-8 (required for vim-devicons)
+set encoding=utf8
+
+
+" Highlight cursorline in Insert Mode
+autocmd InsertEnter * set cursorline
+autocmd InsertLeave * set nocursorline
+autocmd vimenter * colorscheme gruvbox
+" highlight CursorLine term=bold cterm=bold guibg=Gray40
+
+
+" Lightline status bar
+set laststatus=2
+
+
+" Set fonts for vim-devicons
+set guifont=DroidSansMono_Nerd_Font:h11
+
+
+" Show tabline
+set showtabline=2
+
+
+" Set 85 chars marker
+set colorcolumn=86
+
+
+" Swap files
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
 
 
 " Open splits on the right and below
@@ -64,29 +116,45 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 
+" Move between buffers
+nnoremap <tab>   :bn<cr>
+nnoremap <S-tab> :bp<cr>
+
+
 " UI config
-set relativenumber                 " show relative line numbers
-set number                         " show absolute line number
-filetype indent on                 " load filetype-specific indent files
-set wildmode=longest,list          
-set showmatch                      " highlight matching brackets
-set colorcolumn=80                 " show the 80 chars boundary
-" hi colorcolumn ctermbg=Grey40    " Color of the chars boundary
-highlight ColorColumn term=bold cterm=bold guibg=lightgray
+set relativenumber
+set number
+
+
+" Load filetype-specific indent files
+filetype indent on
+
+
+" Complete longest common string, then each full match
+set wildmode=longest,list
+
+
+" Highlight matching brackets
+set showmatch
 
 
 " Searching
-set hlsearch                       " highlight words searched for
-set incsearch                      " search as character are entered
-set ignorecase                     " does exactly what it says
+" Highlight words searched for
+set hlsearch
+
+" Search as characters are entered
+set incsearch
+
+" (Thankfully !) does exactly what it says
+set ignorecase
 
 
 " For the tabs <3
-set tabstop=4                      " set the default tabstop
-set softtabstop=4                  " set no.of spaces in tab when editing
-set shiftwidth=4                   " set the default shift width for indents
-set expandtab                      " make tabs into spaces (set by tabstop)
-set smarttab                       " smarter tab levels
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set smarttab
 
 
 " Cursor shape
@@ -103,134 +171,69 @@ set hidden
 
 
 " Fancy boi
-set nocompatible                   " for fancy stuffs in vim
+set nocompatible
 
 
-" Swap files
-set backupdir=~/.vim/backup//      " Use this directory for backup
-set directory=~/.vim/swap//        " Swap files out of project directory
+" Make sure you use single quotes
+call plug#begin('~/.vim/plugged')
 
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+Plug 'itchyny/lightline.vim'
 
-" Vundle plugins
-" set the runtime path to                                                          
-" include Vundle and initialize                                                    
-set rtp+=~/.vim/bundle/Vundle.vim                                                  
-call vundle#begin()                                                                
-                                                                                   
-" alternatively, pass a path where                                                 
-" Vundle should install plugins                                                    
-" call vundle#begin('~/some/path/here')                                            
-                                                                                   
-" let Vundle manage Vundle, required                                               
-Plugin 'tpope/vim-fugitive'                                                        
-Plugin 'tpope/vim-commentary'                                                        
-Plugin 'VundleVim/Vundle.vim'                                                      
-" Plugin 'Valloric/YouCompleteMe'
-Plugin 'nvie/vim-flake8'                                                           
-" Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}                    
-" Plugin 'vim-airline/vim-airline'
-" Plugin 'vim-airline/vim-airline-themes'
-Plugin 'itchyny/lightline.vim'
-Plugin 'scrooloose/nerdtree'                                                       
-Plugin 'Xuyuanp/nerdtree-git-plugin'                                               
-" Plugin 'lifepillar/vim-solarized8'
+" Conquer of completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" VIM markdown support
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+" Tim pope's Fugitive
+Plug 'tpope/vim-fugitive'
 
-" Plugin 'python/black'                               
-                                                      
-" add all your plugins here                           
-" (note older versions of Vundle                      
-" used Bundle instead of Plugin)                      
-                                                      
-" All of your Plugins must be added                   
-" before the following line                           
-call vundle#end()                  " required
+" Nerd tree
+Plug 'scrooloose/nerdtree'
 
+" Go support
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-" General mapping
+" Nerd tree git plugin
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" Set a map leader for more key combos
-let mapleader = ','
+" Lightline bufferline
+Plug 'mengelbrecht/lightline-bufferline'
 
-" quick save
-nmap <leader>, :w<cr>
+" Tim pope's commentary
+Plug 'tpope/vim-commentary'
 
-" paste toggle
-set pastetoggle=<leader>v
+" Vim devicons
+Plug 'ryanoasis/vim-devicons'
 
-" quick edit vimrc
-nnoremap <leader>ev :e! ~/.vimrc<cr>
+" gruvbox
+Plug 'morhetz/gruvbox'
 
-" quick edit gitconfig
-nnoremap <leader>eg :e! ~/.gitconfig<cr>
+" gruvbox lightline
+Plug 'shinchu/lightline-gruvbox.vim'
 
-" quick switch between buffers
-nmap <leader>. <c-^>
+" Initialize plugin system
+call plug#end()
 
-" quick source .vimrc
-nmap <leader>so :so ~/.vimrc<cr>
-
-" quick toggle nerdtree
-nmap <leader>nt :NERDTreeToggle<cr>
-
-
-" These are some hacky specific vim commands
-let g:ycm_confirm_extra_conf = 0
-let g:airline_theme = 'powerlineish'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let vim_markdown_preview_github=1
-let g:pymode_python = 'python3'
-let g:vim_markdown_folding_disabled = 1
 let g:NERDTreeWinPos = "right"
-let g:ycm_global_ycm_extra_conf = "/home/aguha/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"
-" let g:lightline = {
-"       \ 'colorscheme': 'solarized',
-"       \ }
-
-" Light line stuff
+let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#show_number = 1
+let g:lightline#bufferline#unicode_symbols = 1
 let g:lightline = {
-  \   'colorscheme': 'solarized',
-  \   'active': {
-  \     'left':[ [ 'mode', 'paste' ],
-  \              [ 'gitbranch', 'readonly', 'filename', 'modified' ]
-  \     ]
-  \   },
-	\   'component': {
-	\     'lineinfo': '%3l:%-2v',
-	\   },
-  \   'component_function': {
-  \     'gitbranch': 'fugitive#head',
-  \   }
-  \ }
+      \ 'colorscheme': 'gruvbox',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
+" let g:lightline = {'colorscheme': 'solarized'}
+let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
 
-
-autocmd BufRead,BufNewFile *.htm,*.js,*.php,*.html,*.yml,*.yaml,*.xml setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd BufRead,BufNewFile *.cpp,*.hpp,*.c,*.cc,*.h,*.md setlocal colorcolumn=120
-autocmd BufRead,BufNewFile *glmdp*,*nlnop*,mdp-*,nop-* setlocal syntax=yaml tabstop=2 shiftwidth=2 softtabstop=2
-
-" Save session on quitting Vim
-autocmd VimLeave * NERDTreeClose
-" autocmd VimLeave * mksession! [filename]
-
-" Highlight cursorline in Insert Mode
-autocmd InsertEnter * set cursorline
-autocmd InsertLeave * set nocursorline
-highlight CursorLine term=bold cterm=bold guibg=Gray40
-
-
-" Don't show -- INSERT -- while in INSERT MODE
+" Some script is overriding no-show mode, thus putting it at the end
 set noshowmode
-set laststatus=2
 
-" Only start NerdTree on Vim startup
-" autocmd VimEnter * NERDTree
-
-" I have commented these out, they highlight text that surpass
-" the 80 chars limit. The coloring scheme is a bit annoying.
-"
-" highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-" match OverLength /\%81v.\+/
+" Highlight matching brackets
+set showmatch
