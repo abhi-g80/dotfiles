@@ -1,4 +1,3 @@
-" Coloring (use gruvbox)
 syntax on
 set background=dark
 
@@ -60,9 +59,11 @@ set encoding=utf8
 " Highlight cursorline in Insert Mode
 autocmd InsertEnter * set cursorline
 autocmd InsertLeave * set nocursorline
-autocmd vimenter * colorscheme gruvbox
 " highlight CursorLine term=bold cterm=bold guibg=Gray40
 
+
+" Comments in italics
+highlight Comment cterm=italic gui=italic
 
 " Lightline status bar
 set laststatus=2
@@ -75,6 +76,9 @@ set guifont=DroidSansMono_Nerd_Font:h11
 " Show tabline
 set showtabline=2
 
+
+" Set encoding
+set encoding=UTF-8
 
 " Set 85 chars marker
 set colorcolumn=86
@@ -190,7 +194,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 
 " Go support
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'govim/govim'
 
 " Nerd tree git plugin
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -212,6 +217,9 @@ Plug 'shinchu/lightline-gruvbox.vim'
 
 " Initialize plugin system
 call plug#end()
+
+" Color (plugin) is only available after plug#end()
+colo gruvbox
 
 let g:NERDTreeWinPos = "right"
 let g:lightline#bufferline#enable_devicons = 1
