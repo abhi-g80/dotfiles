@@ -59,6 +59,7 @@ set encoding=utf8
 " Highlight cursorline in Insert Mode
 autocmd InsertEnter * set cursorline
 autocmd InsertLeave * set nocursorline
+" autocmd vimenter * colorscheme gruvbox
 " highlight CursorLine term=bold cterm=bold guibg=Gray40
 
 
@@ -195,7 +196,7 @@ Plug 'scrooloose/nerdtree'
 
 " Go support
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'govim/govim'
+" Plug 'govim/govim'
 
 " Nerd tree git plugin
 Plug 'Xuyuanp/nerdtree-git-plugin'
